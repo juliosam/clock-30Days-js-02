@@ -62,11 +62,37 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      transition: transform 0.05s;
+      transition-timing-function: cubic-bezier(0.18, 0.89, 0.04, 2.21);
     }
+
 
   </style>
 
   <script>
+     const segundero = document.querySelector(".second-hand");
+     const minutero = document.querySelector(".min-hand");
+     const horero = document.querySelector(".hour-hand")
+
+    function watch(){
+      const now = new Date();
+      const seconds = now.getSeconds();
+      const secondsDegre = (seconds/60)*360+90;
+      segundero.style.transform = `rotate(${secondsDegre}deg)`
+
+      const minutes = now.getMinutes();
+      const minutesDegre = ((minutes/60)*360+90)+secondsDegre/60;
+      minutero.style.transform = `rotate(${minutesDegre}deg)`
+
+      const hours = now.getHours();
+      const hoursDegre = ((hours/12)*360+90)+minutesDegre/12;
+      horero.style.transform = `rotate(${hoursDegre}deg)`
+
+    }
+
+    setInterval(watch , 1000);
 
 
   </script>
